@@ -17,19 +17,18 @@ public class Chopsticks {
 	public boolean pickUp(Philosopher philosopher,State state){
 		
 		try {
-			if(lock.tryLock(10, TimeUnit.MILLISECONDS)){
+			if(this.lock.tryLock(10, TimeUnit.MILLISECONDS)){
 				System.out.println(philosopher+" got "+state.toString()+" "+this);
 				return true;
 			}
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		return false;
 	}
 	public boolean putDown(Philosopher philosopher, State state){
-		lock.unlock();
+		this.lock.unlock();
 		System.out.println(philosopher+" putdown the "+state.toString()+" "+this);
 		return true;
 	}

@@ -7,19 +7,16 @@ public class Philosopher implements Runnable{
 	private int id;
 	private Chopsticks leftChopstick;
 	private Chopsticks rigthChopstick;
-	private State state;
 	private Random random;
 	private volatile boolean isFull = false;
 	private int eatingCounter=0;
 	
 	
 	public Philosopher(int id, Chopsticks leftChopstick,
-			Chopsticks rigthChopstick, State state) {
-		super();
+			Chopsticks rigthChopstick) {
 		this.id = id;
 		this.leftChopstick = leftChopstick;
 		this.rigthChopstick = rigthChopstick;
-		this.state = state;
 		this.random = new Random();
 	}
 
@@ -36,7 +33,7 @@ public class Philosopher implements Runnable{
 						eat();
 						rigthChopstick.putDown(this, State.RIGHT);
 					}
-					rigthChopstick.putDown(this, State.LEFT);
+					leftChopstick.putDown(this, State.LEFT);
 				}
 			}catch(Exception e){
 				e.printStackTrace();
